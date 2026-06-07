@@ -9,9 +9,12 @@
 		"checkJs": true,
 		"resolveJsonModule": true,
 		"skipLibCheck": true,
-		"types": ["./worker-configuration.d.ts"],
-		"lib": ["esnext"]
+		"lib": ["esnext"],
+		"types": [
+			"./worker-configuration.d.ts",
+			"@cloudflare/vitest-pool-workers/types",
+		],
 	},
-	"include": ["src/**.ts", "src/**.js", "worker-configuration.d.ts"],
-	"exclude": ["node_modules/**"]
+	"include": ["./src/**.ts", "./tests/**.ts", "./worker-configuration.d.ts"],
+	"exclude": ["./node_modules/**"],
 }

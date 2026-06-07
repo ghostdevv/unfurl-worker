@@ -8,6 +8,8 @@ const AttrsSchema = v.union([
 	v.object({ property: StringSchema, content: StringSchema }),
 ]);
 
+export type Attrs = v.InferOutput<typeof AttrsSchema>;
+
 const MetaSchema = v.object({
 	'og:url': v.fallback(v.nullable(v.pipe(StringSchema, v.url())), null),
 	title: SafeStringSchema,
