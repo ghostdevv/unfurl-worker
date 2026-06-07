@@ -572,7 +572,7 @@ packages:
     resolution: {integrity: sha512-3Belt6tdc8bPgAtbcmdtNJlirVoTmEb5e2gC94PnkwEW9jI6CAHUeoG85tjWP5WquqfavoMtMwiG4P926ZKKuQ==}
 
   '@msw/cloudflare@https://pkg.pr.new/mswjs/cloudflare/@msw/cloudflare@4dd1181edf871a9a3bfb75dc0bc8a6a6ef5cf181':
-    resolution: {tarball: https://pkg.pr.new/mswjs/cloudflare/@msw/cloudflare@4dd1181edf871a9a3bfb75dc0bc8a6a6ef5cf181}
+    resolution: {integrity: sha512-Hfwuzuk30cOnVO9XEyxf9Ju5HqzkcJTugYwi75rMFhRMFfbF0b38LYmBYUIxHZq1BpfkXseGCn+mVgebNBFLfQ==, tarball: https://pkg.pr.new/mswjs/cloudflare/@msw/cloudflare@4dd1181edf871a9a3bfb75dc0bc8a6a6ef5cf181}
     version: 0.0.1
     peerDependencies:
       msw: '>=2.14.6'
