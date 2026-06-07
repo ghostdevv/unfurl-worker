@@ -35,8 +35,8 @@ app.get('/', (c) => {
 
 app.get('/v0', async (c) => {
 	const cacheKey = new Request(c.req.url, c.req);
-	// const cachedResponse = await caches.default.match(cacheKey);
-	// if (cachedResponse) return cachedResponse;
+	const cachedResponse = await caches.default.match(cacheKey);
+	if (cachedResponse) return cachedResponse;
 
 	const target = c.req.query('url');
 	if (!isValidURL(target)) return error(400, 'Invalid URL');
