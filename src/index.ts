@@ -1,8 +1,8 @@
 import pkg from '../package.json' with { type: 'json' };
 import { error, isValidURL } from './utils';
 import { Result } from 'better-result';
+import { unfurl } from './unfurl';
 import { cors } from 'hono/cors';
-import { unfurl } from './meta';
 import { Hono } from 'hono';
 
 const app = new Hono<{ Bindings: Env }>();

@@ -3,7 +3,7 @@ import har from '../tests/atproto.har.json' with { type: 'json' };
 import { getStandardSiteDocument } from './atproto';
 import { fromTraffic } from '@msw/source/traffic';
 import { setupNetwork } from '@msw/cloudflare';
-import { unfurl, type Attrs } from './meta';
+import { unfurl, type Attrs } from './unfurl';
 import type { Har } from 'har-format';
 
 interface PageLink {
