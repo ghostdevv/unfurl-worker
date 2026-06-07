@@ -1,5 +1,5 @@
-import { unfurl, type Attrs } from '../src/meta';
 import { describe, it, expect } from 'vitest';
+import { unfurl, type Attrs } from './meta';
 
 function page(meta: Attrs[], url = 'https://willow.sh') {
 	const html = `<html><head>${meta.map((m) => `<meta ${'name' in m ? `name="${m.name}"` : `property="${m.property}"`} content="${m.content}" />`).join(' ')}</head></html>`;
