@@ -14,6 +14,9 @@ importers:
       '@rlly/pedantic':
         specifier: ^0.4.1
         version: 0.4.1(@e18e/eslint-plugin@0.5.0(oxlint@1.68.0(oxlint-tsgolint@0.23.0)))(oxlint-tsgolint@0.23.0)(oxlint@1.68.0(oxlint-tsgolint@0.23.0))
+      better-result:
+        specifier: ^2.9.2
+        version: 2.9.2
       hono:
         specifier: 4.12.21
         version: 4.12.21
@@ -26,6 +29,9 @@ importers:
       prettier:
         specifier: ^3.8.3
         version: 3.8.3
+      valibot:
+        specifier: ^1.4.1
+        version: 1.4.1
       wrangler:
         specifier: 4.93.1
         version: 4.93.1
@@ -593,6 +599,9 @@ packages:
   '@speed-highlight/core@1.2.15':
     resolution: {integrity: sha512-BMq1K3DsElxDWawkX6eLg9+CKJrTVGCBAWVuHXVUV2u0s2711qiChLSId6ikYPfxhdYocLNt3wWwSvDiTvFabw==}
 
+  better-result@2.9.2:
+    resolution: {integrity: sha512-WIFoBPCdnTOdk9inkE1ZRvCZ4P0CpSkAiLlchC65N7n9DcjZ3NhqkBOlafzpOVnO8ixyi37kicmSJ3ENhPZl7Q==}
+
   blake3-wasm@2.1.5:
     resolution: {integrity: sha512-F1+K8EbfOZE49dtoPtmxUQrpXaBIl3ICvasLh+nJta0xkz+9kF/7uet9fLnwKqhDrmj6g+6K3Tw9yQPUg2ka5g==}
 
@@ -687,6 +696,14 @@ packages:
 
   unenv@2.0.0-rc.24:
     resolution: {integrity: sha512-i7qRCmY42zmCwnYlh9H2SvLEypEFGye5iRmEMKjcGi7zk9UquigRjFtTLz0TYqr0ZGLZhaMHl/foy1bZR+Cwlw==}
+
+  valibot@1.4.1:
+    resolution: {integrity: sha512-klCmFTz2jeDluy9RwX+F884TCiogtdBJ/YaxSx1EOBYXa3NXNWj8kR1jjN8rzluwojJVWWaHJ4r1U5LfICnM3g==}
+    peerDependencies:
+      typescript: '>=5'
+    peerDependenciesMeta:
+      typescript:
+        optional: true
 
   workerd@1.20260520.1:
     resolution: {integrity: sha512-mwW6H/NEKObeBVd0qkq91EGyOIC3TaNJBxp7kj5uChif/+qYD7nM5HE8ZYruwvEd15pRwUet+V8r21DCXCGDQQ==}
@@ -1044,6 +1061,8 @@ snapshots:
 
   '@speed-highlight/core@1.2.15': {}
 
+  better-result@2.9.2: {}
+
   blake3-wasm@2.1.5: {}
 
   cookie@1.1.1: {}
@@ -1185,6 +1204,8 @@ snapshots:
   unenv@2.0.0-rc.24:
     dependencies:
       pathe: 2.0.3
+
+  valibot@1.4.1: {}
 
   workerd@1.20260520.1:
     optionalDependencies:
