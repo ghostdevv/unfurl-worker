@@ -40,7 +40,11 @@ app.get('/v0', async (c) => {
 		return error(500, 'failed to unfurl');
 	}
 
-	return c.json(result.value);
+	return c.json(result.value, {
+		headers: {
+			'Cache-Control': 'public, max-age=3600, stale-if-error=10800',
+		},
+	});
 });
 
 export default app;
