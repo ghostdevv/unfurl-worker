@@ -34,34 +34,41 @@ app.get('/', (c) => {
 });
 
 app.get('/v0', async (c) => {
+	const cacheKey = new Request(c.req.url, c.req);
+	const cachedResponse = await caches.default.match(cacheKey);
+	if (cachedResponse) return cachedResponse;
+
 	const target = c.req.query('url');
 	if (!isValidURL(target)) return error(400, 'Invalid URL');
 
-	const response = await fetch(target, {
+	const res = await fetch(target, {
 		headers: {
 			'User-Agent': `unfurl-worker/${pkg.version} (+https://github.com/ghostdevv/unfurl-worker)`,
 			Accept: 'text/html',
 		},
 	});
 
-	const contentType = response.headers.get('Content-Type')?.split(';').at(0);
+	const contentType = res.headers.get('Content-Type')?.split(';').at(0);
 
 	if (contentType !== 'text/html') {
 		return error(400, 'Response Content-Type is not text/html');
 	}
 
-	const result = await Result.tryPromise(async () => await unfurl(response));
+	const result = await Result.tryPromise(async () => await unfurl(res));
 
 	if (result.isErr()) {
 		console.error('failed to unfurl', result.error);
 		return error(500, 'failed to unfurl');
 	}
 
-	return c.json(result.value, {
+	const response = c.json(result.value, {
 		headers: {
 			'Cache-Control': 'public, max-age=3600, stale-if-error=10800',
 		},
 	});
+
+	c.executionCtx.waitUntil(caches.default.put(cacheKey, response.clone()));
+	return response;
 });
 
 export default app;
