@@ -1,0 +1,17 @@
+{
+	"compilerOptions": {
+		"moduleResolution": "Bundler",
+		"target": "ESNext",
+		"module": "ESNext",
+		"strict": true,
+		"verbatimModuleSyntax": true,
+		"allowJs": true,
+		"checkJs": true,
+		"resolveJsonModule": true,
+		"skipLibCheck": true,
+		"types": ["./worker-configuration.d.ts"],
+		"lib": ["esnext"]
+	},
+	"include": ["src/**.ts", "src/**.js", "worker-configuration.d.ts"],
+	"exclude": ["node_modules/**"]
+}

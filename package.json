@@ -1,0 +1,25 @@
+{
+	"private": true,
+	"version": "0.1.0",
+	"scripts": {
+		"dev": "wrangler dev",
+		"deploy": "wrangler deploy --minify",
+		"prepare": "wrangler types",
+		"check": "oxlint && prettier --check . && tsc --noEmit",
+		"fix": "oxlint --fix && prettier --write ."
+	},
+	"devDependencies": {
+		"@e18e/eslint-plugin": "^0.5.0",
+		"@rlly/pedantic": "^0.4.1",
+		"hono": "4.12.21",
+		"oxlint": "^1.68.0",
+		"oxlint-tsgolint": "^0.23.0",
+		"prettier": "^3.8.3",
+		"wrangler": "4.93.1"
+	},
+	"packageManager": "pnpm@11.2.1",
+	"volta": {
+		"node": "26.3.0",
+		"pnpm": "11.2.1"
+	}
+}
