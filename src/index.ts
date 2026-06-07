@@ -1,14 +1,12 @@
 import pkg from '../package.json' with { type: 'json' };
 import { error, isValidURL } from './utils';
 import { Result } from 'better-result';
-import { logger } from 'hono/logger';
 import { cors } from 'hono/cors';
 import { unfurl } from './meta';
 import { Hono } from 'hono';
 
 const app = new Hono<{ Bindings: Env }>();
 
-app.use('*', logger());
 app.use('*', cors());
 
 // oxlint-disable-next-line promise/prefer-await-to-callbacks
