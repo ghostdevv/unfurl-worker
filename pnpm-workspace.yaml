@@ -3,3 +3,6 @@ allowBuilds:
     msw: false
     sharp: true
     workerd: true
+
+trustPolicyExclude:
+    - '@msw/cloudflare@0.0.1'
