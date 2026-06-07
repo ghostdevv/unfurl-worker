@@ -1,12 +1,11 @@
 import pkg from '../package.json' with { type: 'json' };
-import type { HonoEnv } from './types';
 import { Result } from 'better-result';
 import { logger } from 'hono/logger';
 import { unfurl } from './meta';
 import { error } from './utils';
 import { Hono } from 'hono';
 
-const app = new Hono<HonoEnv>();
+const app = new Hono<{ Bindings: Env }>();
 
 app.use('*', logger());
 
