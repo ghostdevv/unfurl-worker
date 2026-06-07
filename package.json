@@ -4,7 +4,6 @@
 	"type": "module",
 	"scripts": {
 		"dev": "wrangler dev",
-		"deploy": "wrangler deploy --minify",
 		"prepare": "wrangler types",
 		"check": "oxlint && prettier --check . && tsc --noEmit",
 		"fix": "oxlint --fix && prettier --write .",
