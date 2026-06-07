@@ -20,15 +20,24 @@
 				"cache": {},
 				"request": {
 					"method": "GET",
-					"url": "https://plc.directory/did%3Aplc%3Adfkjiu36xs6ogt7pux7i7o2b",
+					"url": "https://slingshot.microcosm.blue/xrpc/blue.microcosm.repo.getRecordByUri?at_uri=at%3A%2F%2Fdid%3Aplc%3Adfkjiu36xs6ogt7pux7i7o2b%2Fsite.standard.document%2F3mgeb2zdgsn22",
 					"httpVersion": "http/1.1",
 					"headers": [
 						{
 							"name": "Accept",
-							"value": "application/did+ld+json,application/json"
+							"value": "application/json"
+						},
+						{
+							"name": "User-Agent",
+							"value": "unfurl-worker/0.1.2 (+https://github.com/ghostdevv/unfurl-worker)"
 						}
 					],
-					"queryString": [],
+					"queryString": [
+						{
+							"name": "at_uri",
+							"value": "at%3A%2F%2Fdid%3Aplc%3Adfkjiu36xs6ogt7pux7i7o2b%2Fsite.standard.document%2F3mgeb2zdgsn22"
+						}
+					],
 					"cookies": [],
 					"headersSize": -1,
 					"bodySize": 0
@@ -39,41 +48,33 @@
 					"httpVersion": "http/1.1",
 					"headers": [
 						{
-							"name": "Access-Control-Allow-Origin",
-							"value": "*"
-						},
-						{
-							"name": "Connection",
-							"value": "keep-alive"
-						},
-						{
 							"name": "Content-Length",
-							"value": "532"
+							"value": "818"
 						},
 						{
 							"name": "Content-Type",
-							"value": "application/did+ld+json; charset=utf-8"
+							"value": "application/json; charset=utf-8"
 						},
 						{
-							"name": "X-Powered-By",
-							"value": "Express"
+							"name": "Date",
+							"value": "Sun, 07 Jun 2026 21:46:53 GMT"
 						}
 					],
 					"cookies": [],
 					"content": {
-						"size": 1064,
-						"mimeType": "application/did+ld+json",
-						"text": "{\"@context\":[\"https://www.w3.org/ns/did/v1\",\"https://w3id.org/security/multikey/v1\",\"https://w3id.org/security/suites/secp256k1-2019/v1\"],\"id\":\"did:plc:dfkjiu36xs6ogt7pux7i7o2b\",\"alsoKnownAs\":[\"at://willow.sh\"],\"verificationMethod\":[{\"id\":\"did:plc:dfkjiu36xs6ogt7pux7i7o2b#atproto\",\"type\":\"Multikey\",\"controller\":\"did:plc:dfkjiu36xs6ogt7pux7i7o2b\",\"publicKeyMultibase\":\"zQ3shSqLrLde1q8yiaVsuTmM99zWpixiLjEZZNeLYziihLxVr\"}],\"service\":[{\"id\":\"#atproto_pds\",\"type\":\"AtprotoPersonalDataServer\",\"serviceEndpoint\":\"https://npmx.social\"}]}"
+						"size": 818,
+						"mimeType": "application/json",
+						"text": "{\"cid\":\"bafyreiaouxradpoctwhcq7ymwhk62f37ekjt5zxte2nlb3w6ezoppfbaau\",\"uri\":\"at://did:plc:dfkjiu36xs6ogt7pux7i7o2b/site.standard.document/3mgeb2zdgsn22\",\"value\":{\"$type\":\"site.standard.document\",\"canonicalUrl\":\"https://willow.sh/posts/self-hosting-dns\",\"coverImage\":{\"$type\":\"blob\",\"mimeType\":\"image/png\",\"ref\":{\"$link\":\"bafkreihghmxb42uk4qxwpbgtylbujavdl3w24au3sk2gki7xxkhohvy55a\"},\"size\":218189},\"description\":\"My journey of DNS, including self-hosting the resolver with Pi-hole and AdGuard Home, using paid services like NextDNS and AdGuard DNS, and public privacy-respecting resolvers.\",\"path\":\"/posts/self-hosting-dns\",\"publishedAt\":\"2024-08-22T03:00:43.540Z\",\"site\":\"at://did:plc:dfkjiu36xs6ogt7pux7i7o2b/site.standard.publication/3mgeayo264v22\",\"title\":\"Self-hosting DNS\",\"updatedAt\":\"2024-08-24T22:08:27.000Z\"}}"
 					},
 					"redirectURL": "",
 					"headersSize": -1,
 					"bodySize": -1,
-					"_transferSize": 532,
+					"_transferSize": 818,
 					"_error": null,
 					"_fetchedViaServiceWorker": false
 				},
 				"serverIPAddress": "",
-				"startedDateTime": "2026-06-07T16:34:47.305Z",
+				"startedDateTime": "2026-06-07T21:46:53.467Z",
 				"time": 30,
 				"timings": {
 					"blocked": -1,
@@ -99,20 +100,21 @@
 				"cache": {},
 				"request": {
 					"method": "GET",
-					"url": "https://npmx.social/xrpc/com.atproto.repo.getRecord?collection=site.standard.document&rkey=3mgeb2zdgsn22&repo=did%3Aplc%3Adfkjiu36xs6ogt7pux7i7o2b",
+					"url": "https://slingshot.microcosm.blue/xrpc/blue.microcosm.identity.resolveMiniDoc?identifier=did%3Aplc%3Adfkjiu36xs6ogt7pux7i7o2b",
 					"httpVersion": "http/1.1",
-					"headers": [],
+					"headers": [
+						{
+							"name": "Accept",
+							"value": "application/json"
+						},
+						{
+							"name": "User-Agent",
+							"value": "unfurl-worker/0.1.2 (+https://github.com/ghostdevv/unfurl-worker)"
+						}
+					],
 					"queryString": [
 						{
-							"name": "collection",
-							"value": "site.standard.document"
-						},
-						{
-							"name": "rkey",
-							"value": "3mgeb2zdgsn22"
-						},
-						{
-							"name": "repo",
+							"name": "identifier",
 							"value": "did%3Aplc%3Adfkjiu36xs6ogt7pux7i7o2b"
 						}
 					],
@@ -126,12 +128,8 @@
 					"httpVersion": "http/1.1",
 					"headers": [
 						{
-							"name": "Access-Control-Allow-Origin",
-							"value": "*"
-						},
-						{
 							"name": "Content-Length",
-							"value": "818"
+							"value": "157"
 						},
 						{
 							"name": "Content-Type",
@@ -139,36 +137,24 @@
 						},
 						{
 							"name": "Date",
-							"value": "Sun, 07 Jun 2026 16:53:49 GMT"
-						},
-						{
-							"name": "Vary",
-							"value": "Accept-Encoding"
-						},
-						{
-							"name": "Via",
-							"value": "1.1 Caddy"
-						},
-						{
-							"name": "X-Powered-By",
-							"value": "Express"
+							"value": "Sun, 07 Jun 2026 21:46:53 GMT"
 						}
 					],
 					"cookies": [],
 					"content": {
-						"size": 1636,
+						"size": 157,
 						"mimeType": "application/json",
-						"text": "{\"uri\":\"at://did:plc:dfkjiu36xs6ogt7pux7i7o2b/site.standard.document/3mgeb2zdgsn22\",\"cid\":\"bafyreiaouxradpoctwhcq7ymwhk62f37ekjt5zxte2nlb3w6ezoppfbaau\",\"value\":{\"path\":\"/posts/self-hosting-dns\",\"site\":\"at://did:plc:dfkjiu36xs6ogt7pux7i7o2b/site.standard.publication/3mgeayo264v22\",\"$type\":\"site.standard.document\",\"title\":\"Self-hosting DNS\",\"updatedAt\":\"2024-08-24T22:08:27.000Z\",\"coverImage\":{\"ref\":{\"$link\":\"bafkreihghmxb42uk4qxwpbgtylbujavdl3w24au3sk2gki7xxkhohvy55a\"},\"size\":218189,\"$type\":\"blob\",\"mimeType\":\"image/png\"},\"description\":\"My journey of DNS, including self-hosting the resolver with Pi-hole and AdGuard Home, using paid services like NextDNS and AdGuard DNS, and public privacy-respecting resolvers.\",\"publishedAt\":\"2024-08-22T03:00:43.540Z\",\"canonicalUrl\":\"https://willow.sh/posts/self-hosting-dns\"}}"
+						"text": "{\"did\":\"did:plc:dfkjiu36xs6ogt7pux7i7o2b\",\"handle\":\"willow.sh\",\"pds\":\"https://npmx.social\",\"signing_key\":\"zQ3shSqLrLde1q8yiaVsuTmM99zWpixiLjEZZNeLYziihLxVr\"}"
 					},
 					"redirectURL": "",
 					"headersSize": -1,
 					"bodySize": -1,
-					"_transferSize": 818,
+					"_transferSize": 157,
 					"_error": null,
 					"_fetchedViaServiceWorker": false
 				},
 				"serverIPAddress": "",
-				"startedDateTime": "2026-06-07T16:34:47.825Z",
+				"startedDateTime": "2026-06-07T21:46:53.924Z",
 				"time": 30,
 				"timings": {
 					"blocked": -1,

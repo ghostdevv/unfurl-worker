@@ -14,9 +14,9 @@
 			"./worker-configuration.d.ts",
 			"@cloudflare/vitest-pool-workers/types",
 			"@atcute/standard-site",
-			"@atcute/atproto"
-		]
+			"@atcute/microcosm",
+		],
 	},
 	"include": ["./src/**.ts", "./tests/**.ts", "./worker-configuration.d.ts"],
-	"exclude": ["./node_modules/**"]
+	"exclude": ["./node_modules/**"],
 }

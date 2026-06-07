@@ -10,10 +10,8 @@
 		"test": "vitest"
 	},
 	"devDependencies": {
-		"@atcute/atproto": "^4.0.2",
-		"@atcute/client": "^5.0.0",
-		"@atcute/identity-resolver": "^2.0.0",
 		"@atcute/lexicons": "^2.0.0",
+		"@atcute/microcosm": "^2.0.1",
 		"@atcute/standard-site": "^2.0.1",
 		"@cloudflare/vitest-pool-workers": "^0.16.13",
 		"@e18e/eslint-plugin": "^0.5.0",

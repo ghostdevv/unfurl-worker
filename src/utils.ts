@@ -1,3 +1,7 @@
+import pkg from '../package.json' with { type: 'json' };
+
+export const USER_AGENT = `unfurl-worker/${pkg.version} (+https://github.com/ghostdevv/unfurl-worker)`;
+
 export function error(code: number, error: string) {
 	return Response.json({ error }, { status: code });
 }

@@ -8,18 +8,12 @@ importers:
 
   .:
     devDependencies:
-      '@atcute/atproto':
-        specifier: ^4.0.2
-        version: 4.0.2(@atcute/lexicons@2.0.0)
-      '@atcute/client':
-        specifier: ^5.0.0
-        version: 5.0.0(@atcute/lexicons@2.0.0)
-      '@atcute/identity-resolver':
-        specifier: ^2.0.0
-        version: 2.0.0(@atcute/identity@2.0.0(@atcute/lexicons@2.0.0))(@atcute/lexicons@2.0.0)
       '@atcute/lexicons':
         specifier: ^2.0.0
         version: 2.0.0
+      '@atcute/microcosm':
+        specifier: ^2.0.1
+        version: 2.0.1(@atcute/lexicons@2.0.0)
       '@atcute/standard-site':
         specifier: ^2.0.1
         version: 2.0.1(@atcute/lexicons@2.0.0)
@@ -79,24 +73,13 @@ packages:
     peerDependencies:
       '@atcute/lexicons': ^2.0.0
 
-  '@atcute/client@5.0.0':
-    resolution: {integrity: sha512-Dtrc1no1oAtpUTmkBxH0xKSgy8qcnk8orPf/PkEATW+MB3k8FPHtPH2fshiKd55rioZkb+xaN+7A29WtqPQHRA==}
-    peerDependencies:
-      '@atcute/lexicons': ^2.0.0
-
-  '@atcute/identity-resolver@2.0.0':
-    resolution: {integrity: sha512-IKg1BDQAF2bIdN10DL6KAXmTjK+3enTU2IRbuani9TsFahBwGZ7O5FiVmTiL6QlGfauGNW5S0xNCOxWXWMoR2Q==}
-    peerDependencies:
-      '@atcute/identity': ^2.0.0
-      '@atcute/lexicons': ^2.0.0
-
-  '@atcute/identity@2.0.0':
-    resolution: {integrity: sha512-YXFsggO7eJYifqkN85+kUXJE2a1iI9AyuzPTDjtS/4WE1Zs1/XiPkWmwZlAgtp+pYhVtjm3mJqy/h/mZ0OnIVw==}
-    peerDependencies:
-      '@atcute/lexicons': ^2.0.0
-
   '@atcute/lexicons@2.0.0':
     resolution: {integrity: sha512-fIlwP+TPEAGoF5aU5s+f8N5sOjOu8Mww/sQL1B57Dp2hj3G/EWG9XwOHPokzycBCgXx+UxIIrzZCGy8whsVDZw==}
+
+  '@atcute/microcosm@2.0.1':
+    resolution: {integrity: sha512-mpIOMYgSPK6XbYxDyAexmOkIDCti4PS/Srrk/J8w2eUVKt0NbiPPrZiB/PYyf9F8f4uSZc8iLAyXLhc6NEBIBg==}
+    peerDependencies:
+      '@atcute/lexicons': ^2.0.0
 
   '@atcute/standard-site@2.0.1':
     resolution: {integrity: sha512-fT6cfho6qWqV9kIzacbdD+i1vFBMJSITSbnzzzbBpKKYo1jVbanWytG9SgA3vtIl71H8k0ZHylvGFqzwdOXzLQ==}
@@ -105,9 +88,6 @@ packages:
 
   '@atcute/uint8array@1.1.2':
     resolution: {integrity: sha512-n+lutnbN9mKzSjSVdfsYfzJ40u2971H+iLSL46D6d7zcrA4delxusf/ftGFvj5oGW03OioaFgQOy3Lqa3JmTeA==}
-
-  '@atcute/util-fetch@2.0.0':
-    resolution: {integrity: sha512-v+4aFQ/tuBqTV+URDJaFgm3mASWdglKXiPaGutJ1bs7QtQKmPZeesPY5MzW/a+MtI8GWCEJk8X9wOfalPOFSlg==}
 
   '@atcute/util-text@1.3.1':
     resolution: {integrity: sha512-MRgJXkx67znuBXuoAYCJkBZyd3OApL7zZlNf5kXhuoCXcdiu1nblRDycYTADSkym4epBSQWxh26kmI9sewaq6A==}
@@ -1575,29 +1555,6 @@ snapshots:
     dependencies:
       '@atcute/lexicons': 2.0.0
 
-  '@atcute/client@5.0.0(@atcute/lexicons@2.0.0)':
-    dependencies:
-      '@atcute/identity': 2.0.0(@atcute/lexicons@2.0.0)
-      '@atcute/lexicons': 2.0.0
-    transitivePeerDependencies:
-      - typescript
-
-  '@atcute/identity-resolver@2.0.0(@atcute/identity@2.0.0(@atcute/lexicons@2.0.0))(@atcute/lexicons@2.0.0)':
-    dependencies:
-      '@atcute/identity': 2.0.0(@atcute/lexicons@2.0.0)
-      '@atcute/lexicons': 2.0.0
-      '@atcute/util-fetch': 2.0.0
-      valibot: 1.4.1
-    transitivePeerDependencies:
-      - typescript
-
-  '@atcute/identity@2.0.0(@atcute/lexicons@2.0.0)':
-    dependencies:
-      '@atcute/lexicons': 2.0.0
-      valibot: 1.4.1
-    transitivePeerDependencies:
-      - typescript
-
   '@atcute/lexicons@2.0.0':
     dependencies:
       '@atcute/uint8array': 1.1.2
@@ -1605,18 +1562,16 @@ snapshots:
       '@standard-schema/spec': 1.1.0
       esm-env: 1.2.2
 
+  '@atcute/microcosm@2.0.1(@atcute/lexicons@2.0.0)':
+    dependencies:
+      '@atcute/lexicons': 2.0.0
+
   '@atcute/standard-site@2.0.1(@atcute/lexicons@2.0.0)':
     dependencies:
       '@atcute/atproto': 4.0.2(@atcute/lexicons@2.0.0)
       '@atcute/lexicons': 2.0.0
 
   '@atcute/uint8array@1.1.2': {}
-
-  '@atcute/util-fetch@2.0.0':
-    dependencies:
-      valibot: 1.4.1
-    transitivePeerDependencies:
-      - typescript
 
   '@atcute/util-text@1.3.1':
     dependencies:

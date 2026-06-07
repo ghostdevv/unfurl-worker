@@ -1,5 +1,5 @@
+import { error, isValidURL, USER_AGENT } from './utils';
 import pkg from '../package.json' with { type: 'json' };
-import { error, isValidURL } from './utils';
 import { Result } from 'better-result';
 import { unfurl } from './unfurl';
 import { cors } from 'hono/cors';
@@ -47,7 +47,7 @@ app.get('/v0', async (c) => {
 
 	const res = await fetch(target, {
 		headers: {
-			'User-Agent': `unfurl-worker/${pkg.version} (+https://github.com/ghostdevv/unfurl-worker)`,
+			'User-Agent': USER_AGENT,
 			Accept: 'text/html',
 		},
 	});
