@@ -6,4 +6,5 @@
 	"main": "src/index.ts",
 	"workers_dev": false,
 	"preview_urls": false,
+	"routes": [{ "pattern": "unfurl.willow.rest", "custom_domain": true }],
 }
