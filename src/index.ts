@@ -11,6 +11,17 @@ const app = new Hono<{ Bindings: Env }>();
 app.use('*', logger());
 app.use('*', cors());
 
+// oxlint-disable-next-line promise/prefer-await-to-callbacks
+app.onError((err, _c) => {
+	console.error('hono found error', err);
+	return error(500, 'Internal Server Error');
+});
+
+// oxlint-disable-next-line promise/prefer-await-to-callbacks
+app.notFound((_c) => {
+	return error(404, 'Route not found');
+});
+
 function isURL(url?: string): url is string {
 	if (!url) return false;
 	const parsed = URL.parse(url);
