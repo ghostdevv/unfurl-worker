@@ -3,6 +3,7 @@ import { error, isValidURL } from './utils';
 import { Result } from 'better-result';
 import { unfurl } from './unfurl';
 import { cors } from 'hono/cors';
+import { DEV } from 'esm-env';
 import { Hono } from 'hono';
 
 const app = new Hono<{ Bindings: Env }>();
@@ -35,8 +36,11 @@ app.get('/', (c) => {
 
 app.get('/v0', async (c) => {
 	const cacheKey = new Request(c.req.url, c.req);
-	const cachedResponse = await caches.default.match(cacheKey);
-	if (cachedResponse) return cachedResponse;
+
+	if (!DEV) {
+		const cachedResponse = await caches.default.match(cacheKey);
+		if (cachedResponse) return cachedResponse;
+	}
 
 	const target = c.req.query('url');
 	if (!isValidURL(target)) return error(400, 'Invalid URL');
@@ -67,7 +71,12 @@ app.get('/v0', async (c) => {
 		},
 	});
 
-	c.executionCtx.waitUntil(caches.default.put(cacheKey, response.clone()));
+	if (!DEV) {
+		c.executionCtx.waitUntil(
+			caches.default.put(cacheKey, response.clone()),
+		);
+	}
+
 	return response;
 });
 

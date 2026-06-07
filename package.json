@@ -22,6 +22,7 @@
 		"@rlly/pedantic": "^0.4.1",
 		"@types/har-format": "^1.2.16",
 		"better-result": "^2.9.2",
+		"esm-env": "^1.2.2",
 		"hono": "4.12.21",
 		"msw": "^2.14.6",
 		"oxlint": "^1.68.0",
