@@ -28,6 +28,7 @@ interface UnfurlResult {
 
 export async function unfurl(response: Response): Promise<UnfurlResult | null> {
 	const meta: Record<string, string> = {};
+	const url = new URL(response.url);
 
 	const rewriter = new HTMLRewriter().on('meta', {
 		element(element) {
@@ -55,11 +56,21 @@ export async function unfurl(response: Response): Promise<UnfurlResult | null> {
 	const parsed = v.safeParse(MetaSchema, meta);
 	if (!parsed.success) return null;
 
-	return {
+	const result: UnfurlResult = {
 		url: parsed.output['og:url'] ?? response.url,
 		title: parsed.output['og:title'] ?? parsed.output.title,
 		description:
 			parsed.output['og:description'] ?? parsed.output.description,
 		image: parsed.output['og:image'],
 	};
+
+	if (!result.title && url.hostname == 'github.com') {
+		const [, owner, repo] = url.pathname.split('/');
+
+		if (owner?.trim() && repo?.trim()) {
+			result.title = `GitHub - ${owner}/${repo}`;
+		}
+	}
+
+	return result;
 }

@@ -148,4 +148,50 @@ describe('unfurl', () => {
 			expect(result).toMatchObject({ image: 'not-a-url' });
 		});
 	});
+
+	describe('github fallback title', () => {
+		it('generates title for a github repo url', async () => {
+			const result = await unfurl(
+				page([], 'https://github.com/owner/repo'),
+			);
+			expect(result).toMatchObject({ title: 'GitHub - owner/repo' });
+		});
+
+		it('does not override existing title on github', async () => {
+			const title = crypto.randomUUID();
+			const result = await unfurl(
+				page(
+					[{ name: 'title', content: title }],
+					'https://github.com/owner/repo',
+				),
+			);
+			expect(result).toMatchObject({ title });
+		});
+
+		it('does not override existing og:title on github', async () => {
+			const ogTitle = crypto.randomUUID();
+			const result = await unfurl(
+				page(
+					[{ property: 'og:title', content: ogTitle }],
+					'https://github.com/owner/repo',
+				),
+			);
+			expect(result).toMatchObject({ title: ogTitle });
+		});
+
+		it('does not generate fallback for github root', async () => {
+			const result = await unfurl(page([], 'https://github.com'));
+			expect(result?.title).toBeNull();
+		});
+
+		it('does not generate fallback for github user page', async () => {
+			const result = await unfurl(page([], 'https://github.com/user'));
+			expect(result?.title).toBeNull();
+		});
+
+		it('does not generate fallback for non-github url', async () => {
+			const result = await unfurl(page([], 'https://example.com'));
+			expect(result?.title).toBeNull();
+		});
+	});
 });
