@@ -1,6 +1,7 @@
 import pkg from '../package.json' with { type: 'json' };
 import { Result } from 'better-result';
 import { logger } from 'hono/logger';
+import { cors } from 'hono/cors';
 import { unfurl } from './meta';
 import { error } from './utils';
 import { Hono } from 'hono';
@@ -8,6 +9,7 @@ import { Hono } from 'hono';
 const app = new Hono<{ Bindings: Env }>();
 
 app.use('*', logger());
+app.use('*', cors());
 
 function isURL(url?: string): url is string {
 	if (!url) return false;
