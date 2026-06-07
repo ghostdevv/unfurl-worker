@@ -10,11 +10,20 @@
 		"test": "vitest"
 	},
 	"devDependencies": {
+		"@atcute/atproto": "^4.0.2",
+		"@atcute/client": "^5.0.0",
+		"@atcute/identity-resolver": "^2.0.0",
+		"@atcute/lexicons": "^2.0.0",
+		"@atcute/standard-site": "^2.0.1",
 		"@cloudflare/vitest-pool-workers": "^0.16.13",
 		"@e18e/eslint-plugin": "^0.5.0",
+		"@msw/cloudflare": "https://pkg.pr.new/mswjs/cloudflare/@msw/cloudflare@4dd1181edf871a9a3bfb75dc0bc8a6a6ef5cf181",
+		"@msw/source": "^0.6.1",
 		"@rlly/pedantic": "^0.4.1",
+		"@types/har-format": "^1.2.16",
 		"better-result": "^2.9.2",
 		"hono": "4.12.21",
+		"msw": "^2.14.6",
 		"oxlint": "^1.68.0",
 		"oxlint-tsgolint": "^0.23.0",
 		"prettier": "^3.8.3",
@@ -28,6 +37,6 @@
 	},
 	"volta": {
 		"node": "26.3.0",
-		"pnpm": "11.2.1"
+		"pnpm": "11.5.2"
 	}
 }
