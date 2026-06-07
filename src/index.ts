@@ -1,9 +1,9 @@
 import pkg from '../package.json' with { type: 'json' };
+import { error, isValidURL } from './utils';
 import { Result } from 'better-result';
 import { logger } from 'hono/logger';
 import { cors } from 'hono/cors';
 import { unfurl } from './meta';
-import { error } from './utils';
 import { Hono } from 'hono';
 
 const app = new Hono<{ Bindings: Env }>();
@@ -22,15 +22,9 @@ app.notFound((_c) => {
 	return error(404, 'Route not found');
 });
 
-function isURL(url?: string): url is string {
-	if (!url) return false;
-	const parsed = URL.parse(url);
-	return parsed?.protocol === 'http:' || parsed?.protocol === 'https:';
-}
-
 app.get('/v0', async (c) => {
 	const target = c.req.query('url');
-	if (!isURL(target)) return error(400, 'Invalid URL');
+	if (!isValidURL(target)) return error(400, 'Invalid URL');
 
 	const response = await fetch(target, {
 		headers: {
