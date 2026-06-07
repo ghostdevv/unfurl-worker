@@ -27,7 +27,7 @@ interface UnfurlResult {
 }
 
 export async function unfurl(response: Response): Promise<UnfurlResult | null> {
-	const meta: Record<string, string> = {};
+	const meta: Record<string, string> = {}; // todo split up meta and link into sub objects
 	const url = new URL(response.url);
 
 	const rewriter = new HTMLRewriter().on('meta', {
@@ -64,6 +64,7 @@ export async function unfurl(response: Response): Promise<UnfurlResult | null> {
 		image: parsed.output['og:image'],
 	};
 
+	// todo generic
 	if (!result.title && url.hostname == 'github.com') {
 		const [, owner, repo] = url.pathname.split('/');
 
