@@ -22,6 +22,19 @@ app.notFound((_c) => {
 	return error(404, 'Route not found');
 });
 
+app.get('/', (c) => {
+	return c.text(`              ___         __                    __
+   __ _____  / _/_ ______/ /____    _____  ____/ /_____ ____
+  / // / _ \\/ _/ // / __/ /___/ |/|/ / _ \\/ __/  '_/ -_) __/
+  \\_,_/_//_/_/ \\_,_/_/ /_/    |__,__/\\___/_/ /_/\\_\\__/_/
+
+
+  Unfurl Worker v${pkg.version}
+
+  https://github.com/ghostdevv/unfurl-worker
+`);
+});
+
 app.get('/v0', async (c) => {
 	const target = c.req.query('url');
 	if (!isValidURL(target)) return error(400, 'Invalid URL');
