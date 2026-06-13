@@ -176,6 +176,13 @@ describe('unfurl', () => {
 			const result = await unfurl(page([{ title }]));
 			expect(result).toMatchObject({ title });
 		});
+
+		it.only("doesn't have html entities in title", async () => {
+			const result = await unfurl(
+				page([{ title: 'that&#39;s incredible' }]),
+			);
+			expect(result).toMatchObject({ title: "that's incredible" });
+		});
 	});
 
 	describe('description', () => {

@@ -1,5 +1,6 @@
 import { isResourceUri } from '@atcute/lexicons/syntax';
 import { getStandardSiteDocument } from './atproto';
+import * as entities from 'entities';
 import * as v from 'valibot';
 
 const StringSchema = v.pipe(v.string(), v.trim(), v.minLength(1));
@@ -77,7 +78,7 @@ export async function unfurl(response: Response): Promise<UnfurlResult | null> {
 				if (htmlTitleFinished && meta.htmlTitle) return;
 				htmlTitleFinished = lastInTextNode;
 				meta.htmlTitle ??= '';
-				meta.htmlTitle += text;
+				meta.htmlTitle += entities.decodeHTML(text);
 			},
 		})
 		.transform(response)
