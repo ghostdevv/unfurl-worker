@@ -26,6 +26,7 @@ const MetaSchema = v.object({
 		SafeStringSchema,
 		v.transform((input) => (isResourceUri(input) ? input : null)),
 	),
+	htmlTitle: SafeStringSchema,
 });
 
 interface UnfurlResult {
@@ -70,6 +71,11 @@ export async function unfurl(response: Response): Promise<UnfurlResult | null> {
 				meta[parsed.output.rel] = parsed.output.href;
 			},
 		})
+		.on('title', {
+			text(text) {
+				meta['htmlTitle'] ??= text.text;
+			},
+		})
 		.transform(response)
 		.text();
 
@@ -86,7 +92,8 @@ export async function unfurl(response: Response): Promise<UnfurlResult | null> {
 		title:
 			standardSiteDocument?.title ??
 			parsed.output['og:title'] ??
-			parsed.output.title,
+			parsed.output.title ??
+			parsed.output.htmlTitle,
 		description:
 			standardSiteDocument?.description ??
 			parsed.output['og:description'] ??

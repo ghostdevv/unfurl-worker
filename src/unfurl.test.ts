@@ -11,12 +11,16 @@ interface PageLink {
 	href: string;
 }
 
-function page(tags: (Attrs | PageLink)[], url = 'https://willow.sh') {
+type Title = { title: string };
+
+function page(tags: (Title | Attrs | PageLink)[], url = 'https://willow.sh') {
 	const links = tags.filter((t): t is PageLink => 'rel' in t);
 	const meta = tags.filter((t): t is Attrs => !('rel' in t));
+	const title = tags.filter((t): t is Title => 'title' in t);
 
 	const html = `<html>
         <head>
+            ${title.map((t) => `<title>${t.title}</title>`).join('')}
             ${meta.map((m) => `<meta ${'name' in m ? `name="${m.name}"` : `property="${m.property}"`} content="${m.content}" />`).join('\n')}
             ${links.map((l) => `<link rel="${l.rel}" href="${l.href}" />`).join(' ')}
         </head>
@@ -103,6 +107,63 @@ describe('unfurl', () => {
 				]),
 			);
 			expect(result).toMatchObject({ title: ogTitle });
+		});
+
+		it('finds html title element', async () => {
+			const title = crypto.randomUUID();
+			const result = await unfurl(
+				page([{ title }], 'https://example.com'),
+			);
+			expect(result).toMatchObject({ title: title });
+		});
+
+		it('og:title has higher priority than html title', async () => {
+			const ogTitle = crypto.randomUUID();
+			const htmlTitle = crypto.randomUUID();
+			const result = await unfurl(
+				page(
+					[
+						{ title: htmlTitle },
+						{ property: 'og:title', content: ogTitle },
+					],
+					'https://example.com',
+				),
+			);
+			expect(result).toMatchObject({ title: ogTitle });
+		});
+
+		it('meta title has higher priority than html title', async () => {
+			const metaTitle = crypto.randomUUID();
+			const htmlTitle = crypto.randomUUID();
+			const result = await unfurl(
+				page(
+					[
+						{ title: htmlTitle },
+						{ name: 'title', content: metaTitle },
+					],
+					'https://example.com',
+				),
+			);
+			expect(result).toMatchObject({ title: metaTitle });
+		});
+
+		it('html title used as fallback when no og:title or meta title', async () => {
+			const title = crypto.randomUUID();
+			const result = await unfurl(
+				page([{ title }], 'https://example.com'),
+			);
+			expect(result).toMatchObject({ title: title });
+		});
+
+		it('first html title is used when multiple are found', async () => {
+			const title = crypto.randomUUID();
+			const result = await unfurl(
+				page(
+					[{ title: title }, { title: crypto.randomUUID() }],
+					'https://example.com',
+				),
+			);
+			expect(result).toMatchObject({ title: title });
 		});
 	});
 
