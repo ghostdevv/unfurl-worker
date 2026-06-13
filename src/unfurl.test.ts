@@ -11,7 +11,9 @@ interface PageLink {
 	href: string;
 }
 
-type Title = { title: string };
+interface Title {
+	title: string;
+}
 
 function page(tags: (Title | Attrs | PageLink)[], url = 'https://willow.sh') {
 	const links = tags.filter((t): t is PageLink => 'rel' in t);
@@ -164,6 +166,15 @@ describe('unfurl', () => {
 				),
 			);
 			expect(result).toMatchObject({ title: title });
+		});
+
+		it('html title works over multiple text nodes', async () => {
+			const a = crypto.randomUUID();
+			const b = crypto.randomUUID();
+			const c = crypto.randomUUID();
+			const title = `${a} <!-- ${b} --> ${c}`;
+			const result = await unfurl(page([{ title }]));
+			expect(result).toMatchObject({ title });
 		});
 	});
 

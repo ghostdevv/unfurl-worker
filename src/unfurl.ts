@@ -49,6 +49,7 @@ function getAttributes(element: Element) {
 export async function unfurl(response: Response): Promise<UnfurlResult | null> {
 	const meta: Record<string, string> = {}; // todo split up meta and link into sub objects
 	const url = new URL(response.url);
+	let htmlTitleFinished = false;
 
 	await new HTMLRewriter()
 		.on('meta', {
@@ -72,8 +73,11 @@ export async function unfurl(response: Response): Promise<UnfurlResult | null> {
 			},
 		})
 		.on('title', {
-			text(text) {
-				meta['htmlTitle'] ??= text.text;
+			text({ text, lastInTextNode }) {
+				if (htmlTitleFinished && meta.htmlTitle) return;
+				htmlTitleFinished = lastInTextNode;
+				meta.htmlTitle ??= '';
+				meta.htmlTitle += text;
 			},
 		})
 		.transform(response)
