@@ -9,5 +9,8 @@ export default defineConfig({
 	],
 	test: {
 		mockReset: true,
+		coverage: {
+			provider: 'istanbul',
+		},
 	},
 });

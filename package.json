@@ -19,6 +19,7 @@
 		"@msw/source": "^0.6.1",
 		"@rlly/pedantic": "^0.4.1",
 		"@types/har-format": "^1.2.16",
+		"@vitest/coverage-istanbul": "4.1.8",
 		"better-result": "^2.9.2",
 		"entities": "^8.0.0",
 		"esm-env": "^1.2.2",
