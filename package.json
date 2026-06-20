@@ -22,7 +22,7 @@
 		"better-result": "^2.9.2",
 		"entities": "^8.0.0",
 		"esm-env": "^1.2.2",
-		"hono": "4.12.21",
+		"hono": "4.12.25",
 		"msw": "^2.14.6",
 		"oxlint": "^1.68.0",
 		"oxlint-tsgolint": "^0.23.0",
