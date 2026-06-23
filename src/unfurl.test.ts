@@ -68,6 +68,19 @@ describe('unfurl', () => {
 			);
 			expect(result).toMatchObject({ title });
 		});
+
+		it("doesn't have html entites in url", async () => {
+			const result = await unfurl(
+				page([
+					{
+						property: 'og:url',
+						content: 'https:&#x2F;&#x2F;example.com&#x2F;page',
+					},
+				]),
+			);
+
+			expect(result).toMatchObject({ url: 'https://example.com/page' });
+		});
 	});
 
 	describe('title', () => {
@@ -224,6 +237,24 @@ describe('unfurl', () => {
 				]),
 			);
 			expect(result).toMatchObject({ description });
+		});
+
+		it("doesn't have html entites in description", async () => {
+			const result = await unfurl(
+				page([
+					{ name: 'description', content: 'that&#39;s incredible' },
+				]),
+			);
+			expect(result).toMatchObject({ description: "that's incredible" });
+		});
+
+		it("doesn't have html entites in og:description", async () => {
+			const result = await unfurl(
+				page([
+					{ name: 'description', content: 'that&#39;s incredible' },
+				]),
+			);
+			expect(result).toMatchObject({ description: "that's incredible" });
 		});
 	});
 

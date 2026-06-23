@@ -63,7 +63,7 @@ export async function unfurl(response: Response): Promise<UnfurlResult | null> {
 						? parsed.output.name
 						: parsed.output.property;
 
-				meta[key] ??= parsed.output.content;
+				meta[key] ??= entities.decodeHTML(parsed.output.content);
 			},
 		})
 		.on('link', {
