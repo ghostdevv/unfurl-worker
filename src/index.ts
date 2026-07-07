@@ -3,7 +3,6 @@ import pkg from '../package.json' with { type: 'json' };
 import { Result } from 'better-result';
 import { unfurl } from './unfurl';
 import { cors } from 'hono/cors';
-import { DEV } from 'esm-env';
 import { Hono } from 'hono';
 
 const app = new Hono<{ Bindings: Env }>();
@@ -35,13 +34,6 @@ app.get('/', (c) => {
 });
 
 app.get('/v0', async (c) => {
-	const cacheKey = new Request(c.req.url, c.req);
-
-	if (!DEV) {
-		const cachedResponse = await caches.default.match(cacheKey);
-		if (cachedResponse) return cachedResponse;
-	}
-
 	const target = c.req.query('url');
 	if (!isValidURL(target)) return error(400, 'Invalid URL');
 
@@ -69,19 +61,12 @@ app.get('/v0', async (c) => {
 		return error(500, 'failed to unfurl');
 	}
 
-	const response = c.json(result.value, {
+	return c.json(result.value, {
 		headers: {
-			'Cache-Control': 'public, max-age=3600, stale-if-error=10800',
+			'Cache-Control':
+				'public, max-age=3600, stale-while-revalidate=3600, stale-if-error=3600',
 		},
 	});
-
-	if (!DEV) {
-		c.executionCtx.waitUntil(
-			caches.default.put(cacheKey, response.clone()),
-		);
-	}
-
-	return response;
 });
 
 export default app;
