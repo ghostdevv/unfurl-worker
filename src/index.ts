@@ -52,6 +52,10 @@ app.get('/v0', async (c) => {
 		},
 	});
 
+	if (!res.ok) {
+		return error(500, 'Failed to unfurl, please try again later');
+	}
+
 	const contentType = res.headers.get('Content-Type')?.split(';').at(0);
 
 	if (contentType !== 'text/html') {
