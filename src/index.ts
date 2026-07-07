@@ -34,6 +34,13 @@ app.get('/', (c) => {
 });
 
 app.get('/v0', async (c) => {
+	const ip = c.req.header('cf-connecting-ip') ?? '';
+	const { success } = await c.env.RATE_LIMITS.limit({ key: ip });
+
+	if (!success) {
+		return error(429, 'Rate limit exceeded, try again in a minute');
+	}
+
 	const target = c.req.query('url');
 	if (!isValidURL(target)) return error(400, 'Invalid URL');
 

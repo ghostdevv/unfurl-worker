@@ -8,4 +8,14 @@
 	"preview_urls": false,
 	"routes": [{ "pattern": "unfurl.willow.rest", "custom_domain": true }],
 	"cache": { "enabled": true },
+	"ratelimits": [
+		{
+			"name": "RATE_LIMITS",
+			"namespace_id": "1000",
+			"simple": {
+				"limit": 12,
+				"period": 60,
+			},
+		},
+	],
 }
