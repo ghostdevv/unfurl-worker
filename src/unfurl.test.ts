@@ -267,11 +267,13 @@ describe('unfurl', () => {
 			expect(result).toMatchObject({ image: imageUrl });
 		});
 
-		it("invalid image url doesn't fail parsing", async () => {
+		it('supports relative image url', async () => {
 			const result = await unfurl(
-				page([{ property: 'og:image', content: 'not-a-url' }]),
+				page([{ property: 'og:image', content: '/image.jpg' }]),
 			);
-			expect(result).toMatchObject({ image: 'not-a-url' });
+			expect(result).toMatchObject({
+				image: new URL('/image.jpg', result!.url).toString(),
+			});
 		});
 	});
 

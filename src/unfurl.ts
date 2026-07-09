@@ -92,6 +92,11 @@ export async function unfurl(response: Response): Promise<UnfurlResult | null> {
 		? await getStandardSiteDocument(standardSiteDocumentURI)
 		: null;
 
+	const image = URL.parse(
+		standardSiteDocument?.coverImage ?? parsed.output['og:image'] ?? '',
+		response.url,
+	);
+
 	const result: UnfurlResult = {
 		url: parsed.output['og:url'] ?? response.url,
 		title:
@@ -103,7 +108,7 @@ export async function unfurl(response: Response): Promise<UnfurlResult | null> {
 			standardSiteDocument?.description ??
 			parsed.output['og:description'] ??
 			parsed.output.description,
-		image: standardSiteDocument?.coverImage ?? parsed.output['og:image'],
+		image: image?.toString() ?? null,
 		standardSiteDocument: standardSiteDocumentURI,
 	};
 
