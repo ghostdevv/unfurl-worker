@@ -92,10 +92,12 @@ export async function unfurl(response: Response): Promise<UnfurlResult | null> {
 		? await getStandardSiteDocument(standardSiteDocumentURI)
 		: null;
 
-	const image = URL.parse(
-		standardSiteDocument?.coverImage ?? parsed.output['og:image'] ?? '',
-		response.url,
-	);
+	const rawImage =
+		standardSiteDocument?.coverImage ?? parsed.output['og:image'] ?? '';
+
+	const image = rawImage.trim().length
+		? URL.parse(rawImage, response.url)
+		: null;
 
 	const result: UnfurlResult = {
 		url: parsed.output['og:url'] ?? response.url,

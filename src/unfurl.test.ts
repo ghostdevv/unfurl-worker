@@ -267,6 +267,13 @@ describe('unfurl', () => {
 			expect(result).toMatchObject({ image: imageUrl });
 		});
 
+		it('empty image url returns null', async () => {
+			const result = await unfurl(
+				page([{ property: 'og:image', content: '' }]),
+			);
+			expect(result).toMatchObject({ image: null });
+		});
+
 		it('supports relative image url', async () => {
 			const result = await unfurl(
 				page([{ property: 'og:image', content: '/image.jpg' }]),
