@@ -1,4 +1,4 @@
-import { error, isValidURL, USER_AGENT } from './utils';
+import { error, isValidURL, STEALTH_USER_AGENT } from './utils';
 import pkg from '../package.json' with { type: 'json' };
 import { Result } from 'better-result';
 import { unfurl } from './unfurl';
@@ -46,7 +46,7 @@ app.get('/v0', async (c) => {
 
 	const res = await fetch(target, {
 		headers: {
-			'User-Agent': USER_AGENT,
+			'User-Agent': STEALTH_USER_AGENT,
 			Accept: 'text/html',
 		},
 	});

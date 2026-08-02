@@ -1,7 +1,7 @@
 import { BlueMicrocosmIdentityResolveMiniDoc } from '@atcute/microcosm';
 import { SiteStandardDocument } from '@atcute/standard-site';
+import { isValidURL, REAL_USER_AGENT } from './utils';
 import { isBlob } from '@atcute/lexicons/interfaces';
-import { isValidURL, USER_AGENT } from './utils';
 import {
 	type BaseSchema,
 	type InferInput,
@@ -36,7 +36,7 @@ async function slingshot<T extends BaseSchema>(
 
 	const response = await fetch(url, {
 		headers: {
-			'User-Agent': USER_AGENT,
+			'User-Agent': REAL_USER_AGENT,
 			Accept: 'application/json',
 		},
 	});
