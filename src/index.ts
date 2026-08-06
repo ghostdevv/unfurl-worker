@@ -5,6 +5,7 @@ import { unfurl } from './unfurl';
 import { cors } from 'hono/cors';
 import { Hono } from 'hono';
 
+// oxlint-disable-next-line typescript/consistent-generic-constructors
 const app = new Hono<{ Bindings: Env }>();
 
 app.use('*', cors());

@@ -17,7 +17,7 @@ describe('cors', () => {
 		);
 		expect(response.headers.get('Access-Control-Allow-Origin')).toBe('*');
 		expect(response.headers.get('Access-Control-Allow-Methods')).toBe(
-			'GET,HEAD,PUT,POST,DELETE,PATCH',
+			'GET,HEAD,PUT,POST,DELETE,PATCH,QUERY',
 		);
 	});
 });
