@@ -23,6 +23,7 @@ const MetaSchema = v.object({
 	description: SafeStringSchema,
 	'og:description': SafeStringSchema,
 	'og:image': SafeStringSchema,
+	image: SafeStringSchema,
 	'site.standard.document': v.pipe(
 		SafeStringSchema,
 		v.transform((input) => (isResourceUri(input) ? input : null)),
@@ -93,9 +94,11 @@ export async function unfurl(response: Response): Promise<UnfurlResult | null> {
 		: null;
 
 	const rawImage =
-		standardSiteDocument?.coverImage ?? parsed.output['og:image'] ?? '';
+		standardSiteDocument?.coverImage ??
+		parsed.output['og:image'] ??
+		parsed.output.image;
 
-	const image = rawImage.trim().length
+	const image = rawImage?.trim().length
 		? URL.parse(rawImage, response.url)
 		: null;
 

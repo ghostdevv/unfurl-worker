@@ -282,6 +282,17 @@ describe('unfurl', () => {
 				image: new URL('/image.jpg', result!.url).toString(),
 			});
 		});
+
+		it('supports name="image"', async () => {
+			const result = await unfurl(
+				page([
+					{ name: 'image', content: 'https://example.com/image.jpg' },
+				]),
+			);
+			expect(result).toMatchObject({
+				image: 'https://example.com/image.jpg',
+			});
+		});
 	});
 
 	describe('github fallback title', () => {
