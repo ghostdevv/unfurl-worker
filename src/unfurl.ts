@@ -5,11 +5,15 @@ import * as v from 'valibot';
 
 const StringSchema = v.pipe(v.string(), v.trim(), v.minLength(1));
 const SafeStringSchema = v.fallback(v.nullable(StringSchema), null);
+const DateSchema = v.pipe(StringSchema, v.toDate());
+const SafeDateSchema = v.fallback(v.nullable(DateSchema), null);
 const URLSchema = v.pipe(StringSchema, v.url());
 
 const AttrsSchema = v.union([
 	v.object({ name: StringSchema, content: StringSchema }),
 	v.object({ property: StringSchema, content: StringSchema }),
+	// YouTube's thing
+	v.object({ itemprop: StringSchema, content: StringSchema }),
 ]);
 
 export type Attrs = v.InferOutput<typeof AttrsSchema>;
@@ -29,6 +33,8 @@ const MetaSchema = v.object({
 		v.transform((input) => (isResourceUri(input) ? input : null)),
 	),
 	htmlTitle: SafeStringSchema,
+	'article:published_time': SafeDateSchema,
+	datePublished: SafeDateSchema,
 });
 
 interface UnfurlResult {
@@ -36,6 +42,7 @@ interface UnfurlResult {
 	title: string | null;
 	description: string | null;
 	image: string | null;
+	published: string | null;
 	standardSiteDocument: string | null;
 }
 
@@ -62,7 +69,9 @@ export async function unfurl(response: Response): Promise<UnfurlResult | null> {
 				const key =
 					'name' in parsed.output
 						? parsed.output.name
-						: parsed.output.property;
+						: 'property' in parsed.output
+							? parsed.output.property
+							: parsed.output.itemprop;
 
 				meta[key] ??= entities.decodeHTML(parsed.output.content);
 			},
@@ -102,6 +111,11 @@ export async function unfurl(response: Response): Promise<UnfurlResult | null> {
 		? URL.parse(rawImage, response.url)
 		: null;
 
+	const published =
+		standardSiteDocument?.publishedAt ??
+		parsed.output['article:published_time']?.toISOString() ??
+		parsed.output.datePublished?.toISOString();
+
 	const result: UnfurlResult = {
 		url: parsed.output['og:url'] ?? response.url,
 		title:
@@ -114,6 +128,7 @@ export async function unfurl(response: Response): Promise<UnfurlResult | null> {
 			parsed.output['og:description'] ??
 			parsed.output.description,
 		image: image?.toString() ?? null,
+		published: published ?? null,
 		standardSiteDocument: standardSiteDocumentURI,
 	};
 

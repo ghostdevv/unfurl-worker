@@ -23,7 +23,15 @@ function page(tags: (Title | Attrs | PageLink)[], url = 'https://willow.sh') {
 	const html = `<html>
         <head>
             ${title.map((t) => `<title>${t.title}</title>`).join('')}
-            ${meta.map((m) => `<meta ${'name' in m ? `name="${m.name}"` : `property="${m.property}"`} content="${m.content}" />`).join('\n')}
+            ${meta
+				.map((m) => {
+					if ('name' in m)
+						return `<meta name="${m.name}" content="${m.content}" />`;
+					if ('property' in m)
+						return `<meta property="${m.property}" content="${m.content}" />`;
+					return `<meta itemprop="${m.itemprop}" content="${m.content}" />`;
+				})
+				.join('\n')}
             ${links.map((l) => `<link rel="${l.rel}" href="${l.href}" />`).join(' ')}
         </head>
     </html>`;
@@ -258,6 +266,42 @@ describe('unfurl', () => {
 		});
 	});
 
+	describe('published', () => {
+		it('finds article:published_time', async () => {
+			const published = '2024-01-15T12:00:00Z';
+			const result = await unfurl(
+				page([
+					{ property: 'article:published_time', content: published },
+				]),
+			);
+			expect(result?.published).toBe('2024-01-15T12:00:00.000Z');
+		});
+
+		it('finds datePublished itemprop (YouTube)', async () => {
+			const published = '2024-01-15T12:00:00Z';
+			const result = await unfurl(
+				page([{ itemprop: 'datePublished', content: published }]),
+			);
+			expect(result?.published).toBe('2024-01-15T12:00:00.000Z');
+		});
+
+		it('article:published_time has higher priority than datePublished', async () => {
+			const ogPublished = '2024-01-15T12:00:00Z';
+			const datePublished = '2024-02-20T10:00:00Z';
+			const result = await unfurl(
+				page([
+					{ itemprop: 'datePublished', content: datePublished },
+					{
+						property: 'article:published_time',
+						content: ogPublished,
+					},
+				]),
+			);
+			expect(result?.published).toBe('2024-01-15T12:00:00.000Z');
+			expect(result!.published).not.toBe('2024-02-20T10:00:00.000Z');
+		});
+	});
+
 	describe('image', () => {
 		it('finds og:image', async () => {
 			const imageUrl = 'https://example.com/image.jpg';
@@ -465,6 +509,27 @@ describe('unfurl', () => {
 
 			expect(result?.image).toBe(doc?.coverImage);
 			expect(result?.image).not.toBe('https://example.com/og-image.jpg');
+		});
+
+		it('standard site publishedAt takes precedence over article:published_time', async () => {
+			network.use(...fromTraffic(har as Har));
+			const result = await unfurl(
+				page(
+					[
+						{
+							property: 'article:published_time',
+							content: '2024-02-20T10:00:00Z',
+						},
+						{ rel: 'site.standard.document', href: TEST_URI },
+					],
+					'https://example.com',
+				),
+			);
+
+			const doc = await getStandardSiteDocument(TEST_URI);
+			expect(doc?.publishedAt).not.toBeNull();
+			expect(result?.published).toBe(doc?.publishedAt);
+			expect(result?.published).not.toBe('2024-02-20T10:00:00Z');
 		});
 	});
 });
