@@ -22,7 +22,7 @@
 		"@vitest/coverage-istanbul": "4.1.10",
 		"better-result": "^3.0.0",
 		"entities": "^8.0.0",
-		"hono": "4.13.0",
+		"hono": "4.13.5",
 		"msw": "^2.15.0",
 		"oxlint": "1.77.0",
 		"oxlint-tsgolint": "7.0.2001",
