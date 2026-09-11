@@ -28,7 +28,7 @@
 		"oxlint-tsgolint": "7.0.2001",
 		"prettier": "^3.9.6",
 		"valibot": "^1.4.2",
-		"vitest": "^4.1.10",
+		"vitest": "^4.1.11",
 		"wrangler": "4.119.0"
 	},
 	"packageManager": "pnpm@11.5.2",
